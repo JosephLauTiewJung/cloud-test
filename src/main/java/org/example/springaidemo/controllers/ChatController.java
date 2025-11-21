@@ -31,6 +31,7 @@ public class ChatController {
     Resource promptTemplate;
 
     @GetMapping("/gemini/chat")
+
     public Flux<String> chat(@RequestParam String problem , @RequestParam String name) {
         promptTemplate = new ClassPathResource("/promptTemplates.st");
         return googleChatClient
