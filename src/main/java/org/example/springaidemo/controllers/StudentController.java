@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/students")
 public class StudentController {
@@ -19,6 +21,12 @@ public class StudentController {
     public StudentController(StudentRepo studentRepo, @Qualifier("passwordEncoder") PasswordEncoder bcryptPasswordEncoder) {
         this.studentRepo = studentRepo;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity getAllStudents() {
+        List<Students> all = studentRepo.findAll();
+        return new ResponseEntity(all, HttpStatus.OK);
     }
 
     @PostMapping("/add")
